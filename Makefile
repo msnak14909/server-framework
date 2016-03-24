@@ -72,7 +72,4 @@ clean:
 distclean: clean
 	@rm -rf html
 
-distclean: clean
-	@rm -rf html
-
 -include $(deps)
