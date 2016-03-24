@@ -65,9 +65,12 @@ check-gmon:
 astyle:
 	astyle --style=kr --indent=spaces=4 --indent-switches --suffix=none *.[ch]
 
+doxy:
+	doxygen Doxyfile
+
 clean:
 	$(RM) $(EXEC) $(OBJS) $(deps) *.dot *.png gmon.out
-	@rm -rf $(OUT)
+	@rm -rf $(OUT) html
 
 distclean: clean
 	@rm -rf html
