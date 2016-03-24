@@ -20,7 +20,7 @@ endif
 CFLAGS += -I .
 LDFLAGS = -lpthread
 
-PT ?= test-async
+PT ?= async
 XDOT = ~/xdot.py/xdot.py
 GPROF2DOT = ~/gprof2dot/gprof2dot.py
 OBJS := \
@@ -50,16 +50,16 @@ doc:
 perf:
 	perf stat --repeat 10 \
 	-e cache-misses,cache-references,instructions,cycles,branch-misses,branch-instructions \
-	./$(PT)
+	./test-$(PT)
 
 plot: check-gmon
-	gprof ./$(PT) | $(GPROF2DOT) > $@.dot; \
+	gprof ./test-$(PT) | $(GPROF2DOT) > $@.dot; \
 	dot -Tpng -o $@.png $@.dot; \
 	$(XDOT) ./$@.dot;
 
 check-gmon:
-	@(test -s $(PT) || make PROFILE=1)
-	@(test -s gmon.out || ./$(PT))
+	@(test -s test-$(PT) || make PROFILE=1)
+	@(test -s gmon.out || ./test-$(PT))
 	@(test -s gmon.out || { echo "ERROR: PROFILE needed be set to 1"; exit 1; })
 
 astyle:
