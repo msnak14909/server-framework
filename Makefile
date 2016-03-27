@@ -65,6 +65,9 @@ check-gmon:
 astyle:
 	astyle --style=kr --indent=spaces=4 --indent-switches --suffix=none *.[ch]
 
+bench:
+	ab -c 32 -n 100 http://localhost:8080/
+
 clean:
 	$(RM) $(EXEC) $(OBJS) $(deps) *.dot *.png gmon.out
 	@rm -rf $(OUT)
