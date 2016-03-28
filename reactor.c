@@ -23,6 +23,7 @@ static inline
 int set_fd_polling(int queue, int fd, int action, long milliseconds)
 {
     struct epoll_event chevent;
+    chevent.data.u64 = 0;
     chevent.data.fd = fd;
     chevent.events = EPOLLOUT | EPOLLIN |
                      EPOLLET | EPOLLERR |
